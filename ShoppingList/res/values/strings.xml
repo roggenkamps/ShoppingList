@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Shopping List</string>
+    <string name="done_string">Done:</string>
+    <string name="priority_string">Priority:</string>
+    <string name="date_string">Date:</string>
+    <string name="add_item_string">Add New Item</string>
+    <string name="item_string">Item</string>
+    <string name="status_string">Status</string>
+    <string name="not_done_string">Not Done</string>
+    <string name="cancel_string">Cancel</string>
+    <string name="reset_string">Reset</string>
+    <string name="submit_string">Add</string>
+    <string name="enter_item_string">Enter Item</string>
+
+</resources>
