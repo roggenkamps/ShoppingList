@@ -18,16 +18,26 @@
         android:hint="@string/enter_item_string"
         android:id="@+id/titleView"
         android:imeOptions="actionDone"
-        android:inputType="textAutoComplete"
+        android:inputType="text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/statusCheckBox"
-        android:layout_toEndOf="@+id/statusCheckBox"
-        android:textAppearance="?android:attr/textAppearanceLarge">
+        android:layout_toLeftOf="@+id/deleteButton"
+        android:layout_toStartOf="@+id/deleteButton"
+        android:layout_alignBottom="@+id/statusCheckBox">
         <requestFocus />
     </EditText>
+
+    <Button
+        android:id="@+id/deleteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/delete_string"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignBottom="@+id/titleView" />
 
 </RelativeLayout>

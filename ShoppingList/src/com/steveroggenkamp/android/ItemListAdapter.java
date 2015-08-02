@@ -11,10 +11,13 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -116,23 +119,6 @@ public class  ItemListAdapter extends BaseAdapter {
 		// corresponds to the user interface elements defined
 		// in the layout file
 
-		// TODO - Fix Title in EditText
-		final EditText titleView = (EditText) itemLayout.getChildAt(1);
-		titleView.setText(item.getTitle());
-		titleView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-			@Override
-			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-				boolean handled = false;
-				if (actionId == EditorInfo.IME_ACTION_DONE) {
-					item.setTitle(titleView.getText().toString());
-					v.clearFocus();
-					handled = true;
-				}
-				return handled;
-			}
-		});
-
-
 		// TOD - Set up Status CheckBox
 		final CheckBox statusView = (CheckBox) itemLayout.getChildAt(0);
 		boolean isDone = item.getStatus() == Item.Status.DONE ? true : false;
@@ -152,8 +138,46 @@ public class  ItemListAdapter extends BaseAdapter {
 				}
 				// statusView.setText(item.getStatus().toString());
 				statusView.setChecked(item.getStatus() == Item.Status.DONE ? true : false);
+			}
+		});
+
+		// TOD - Fix Title in EditText
+		final EditText titleView = (EditText) itemLayout.getChildAt(1);
+		titleView.setText(item.getTitle());
+		titleView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+			@Override
+			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+				boolean handled = false;
+				if (actionId == EditorInfo.IME_ACTION_DONE) {
+					item.setTitle(titleView.getText().toString());
+					v.clearFocus();
+					handled = true;
+				}
+				return handled;
+			}
+		});
+
+		// Delete Button
+
+		final Button deleteButton = (Button) itemLayout.getChildAt(2);
+		deleteButton.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				RelativeLayout itemView = (RelativeLayout) v.getParent();
+				ListView       listView = (ListView) itemView.getParent();
+				int            itemNum = -1;
+				for ( int i = 0; i < mItems.size(); i++ ) {
+					if ( listView.getChildAt(i) == itemView ) {
+						itemNum = i;
+						break;
 					}
-				});
+				}
+				if ( itemNum != -1 ) {
+					itemView.invalidate();
+					mItems.remove( itemNum );
+					listView.invalidate();
+				}
+			}
+		});
 
 		return itemLayout;
 	}
