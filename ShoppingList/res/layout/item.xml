@@ -26,7 +26,8 @@
         android:layout_toRightOf="@+id/statusCheckBox"
         android:layout_toLeftOf="@+id/deleteButton"
         android:layout_toStartOf="@+id/deleteButton"
-        android:layout_alignBottom="@+id/statusCheckBox">
+        android:layout_alignBottom="@+id/statusCheckBox"
+        android:editable="true">
         <requestFocus />
     </EditText>
 

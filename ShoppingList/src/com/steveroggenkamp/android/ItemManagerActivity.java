@@ -59,14 +59,8 @@ public class ItemManagerActivity extends ListActivity {
 		footerView.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-
 				Item item = new Item();
 				mAdapter.add(item);
-
-				/*
-				Intent explicitIntent = new Intent(ItemManagerActivity.this, AddItemActivity.class);
-			    startActivityForResult(explicitIntent, ADD_ITEM_REQUEST);
-				*/
 			}
 		});
 
@@ -161,8 +155,16 @@ public class ItemManagerActivity extends ListActivity {
 			String status = null;
 
 			while (null != (title = reader.readLine())) {
-				status = reader.readLine();
-				mAdapter.add(new Item(title, Status.valueOf(status)));
+				try {
+					status = reader.readLine();
+				} catch (IOException e) {
+					status = Status.NOTDONE.toString();
+				}
+				if (status != null ) {
+					mAdapter.add(new Item(title, Status.valueOf(status)));
+				} else {
+					mAdapter.add(new Item(title, Status.DONE));
+				}
 			}
 
 		} catch (FileNotFoundException e) {
